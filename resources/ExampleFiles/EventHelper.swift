@@ -1,3 +1,6 @@
+//  Created by Alex Koumparos on 25/08/17.
+//  Copyright © 2017 Alex Koumparos. All rights reserved.
+
 import DateHelper
 
 class EventHelper {
