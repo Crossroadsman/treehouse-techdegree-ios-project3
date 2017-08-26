@@ -1,3 +1,6 @@
+//  Created by Alex Koumparos on 31/07/17.
+//  Copyright © 2017 Alex Koumparos. All rights reserved.
+
 typealias SimpleDate = (Int, Int?, Int?)
 
 
