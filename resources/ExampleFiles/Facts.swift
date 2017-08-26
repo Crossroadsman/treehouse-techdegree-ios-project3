@@ -1,3 +1,7 @@
+//  Created by Alex Koumparos on 25/08/17.
+//  Copyright © 2017 Alex Koumparos. All rights reserved.
+
+
 // A simple (but unsafe) list of facts ready to be converted to safe HistoricalEvent objects
 let simplifiedData = [
     ("Fabbrica Italiana de Penne a Serbatoio-Aurora founded in Torino", 1919, "https://www.iguanasell.com/pages/aurora-pens-history"),
