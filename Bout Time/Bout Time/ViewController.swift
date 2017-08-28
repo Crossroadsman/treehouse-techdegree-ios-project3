@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     
     var factsLabels = [UILabel]()
     var labelTexts = [String]()
+    var buttons = [UIButton]()
     
     
     //MARK: - View Controller Methods
@@ -51,11 +52,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        buttons = [topFactButton, secondFactUpButton, secondFactDownButton, thirdFactUpButton, thirdFactDownButton, fourthFactButton]
+        
+        
         factsLabels = [topFactLabel, secondFactLabel, thirdFactLabel, fourthFactLabel]
         labelTexts = ["Sputnick was launched by the USSR",
                       "Roger Maris broke the Babe's HR record",
                       "Start of the Korean War",
                       "George McFly first kisses Lorraine"]
+        
+        
+        resetButtonImages(buttons: buttons)
     
     }
 
@@ -75,17 +82,28 @@ class ViewController: UIViewController {
     @IBAction func downButtonTapped(_ sender: UIButton) {
         // change button to red image
         // change any other button to yellow
+        resetButtonImages(buttons: buttons)
+        updateButtonImage(button: sender, selected: true, isUp: false)
+        
         labelTexts = switchStrings(arr: labelTexts, position: sender.tag, directionUp: false)
         for (index, label) in factsLabels.enumerated() {
             label.text = labelTexts[index]
         }
+        
+        
     }
     
     @IBAction func upButtonTapped(_ sender: UIButton) {
+        resetButtonImages(buttons: buttons)
+        updateButtonImage(button: sender, selected: true, isUp: true)
+        
         labelTexts = switchStrings(arr: labelTexts, position: sender.tag, directionUp: true)
         for (index, label) in factsLabels.enumerated() {
             label.text = labelTexts[index]
         }
+        
+        
+        
     }
     
     
@@ -118,6 +136,45 @@ class ViewController: UIViewController {
         
         return tempArr
     }
+    
+    func updateButtonImage(button: UIButton, selected: Bool, isUp: Bool) {
+        
+        switch button {
+        case _ where button.tag == 0:
+            // first button, only has fullsize down
+            
+            selected ? button.setImage(#imageLiteral(resourceName: "down_full_selected"), for: .normal): button.setImage(#imageLiteral(resourceName: "down_full"), for: .normal)
+            
+        case _ where button.tag == factsLabels.count - 1:
+            // last button, only has fullsize up
+            
+            selected ? button.setImage(#imageLiteral(resourceName: "up_full_selected"), for: .normal): button.setImage(#imageLiteral(resourceName: "up_full"), for: .normal)
+            
+        default:
+            // in-between button, has halfsize up and down
+            // odd-indexed buttons are ups, even-indexed buttons are down
+            if isUp {
+                
+                selected ? button.setImage(#imageLiteral(resourceName: "up_half_selected"), for: .normal): button.setImage(#imageLiteral(resourceName: "up_half"), for: .normal)
+            } else {
+                selected ? button.setImage(#imageLiteral(resourceName: "down_half_selected"), for: .normal): button.setImage(#imageLiteral(resourceName: "down_half"), for: .normal)
+            }
+            
+        }
+        
+    }
+    
+    func resetButtonImages(buttons: [UIButton]) {
+        
+        for (index, button) in buttons.enumerated() {
+            
+            let isUp = index % 2 == 1
+            
+            updateButtonImage(button: button, selected: false, isUp: isUp)
+        }
+        
+    }
+    
     
 }
 
