@@ -58,6 +58,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        print("Shake detected")
+    }
+    
+    
     //MARK: - IBActions
     //-----------------
     
@@ -82,6 +87,9 @@ class ViewController: UIViewController {
     
     @IBAction func fourthFactButtonTapped(_ sender: UIButton) {
     }
+    
+    //MARK: - Other Methdos
+    //---------------------
 
 }
 
