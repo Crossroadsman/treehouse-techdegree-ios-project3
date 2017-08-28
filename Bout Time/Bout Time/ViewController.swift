@@ -41,6 +41,8 @@ class ViewController: UIViewController {
     }
     
     var factsLabels = [UILabel]()
+    var labelTexts = [String]()
+    
     
     //MARK: - View Controller Methods
     //-------------------------------
@@ -50,6 +52,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         factsLabels = [topFactLabel, secondFactLabel, thirdFactLabel, fourthFactLabel]
+        labelTexts = ["Sputnick was launched by the USSR",
+                      "Roger Maris broke the Babe's HR record",
+                      "Start of the Korean War",
+                      "George McFly first kisses Lorraine"]
     
     }
 
@@ -69,13 +75,17 @@ class ViewController: UIViewController {
     @IBAction func downButtonTapped(_ sender: UIButton) {
         // change button to red image
         // change any other button to yellow
-        // make label at button index + 1 (mod 4) == label at button index i
-        // make label at button index i == old label at button index + 1
-        factsLabels = switchLabels(arr: factsLabels, position: sender.tag, directionUp: false)
+        labelTexts = switchStrings(arr: labelTexts, position: sender.tag, directionUp: false)
+        for (index, label) in factsLabels.enumerated() {
+            label.text = labelTexts[index]
+        }
     }
     
     @IBAction func upButtonTapped(_ sender: UIButton) {
-        factsLabels = switchLabels(arr: factsLabels, position: sender.tag, directionUp: true)
+        labelTexts = switchStrings(arr: labelTexts, position: sender.tag, directionUp: true)
+        for (index, label) in factsLabels.enumerated() {
+            label.text = labelTexts[index]
+        }
     }
     
     
@@ -85,9 +95,9 @@ class ViewController: UIViewController {
     //---------------------
 
     /**
-     takes an array of labels and switches two elements around depending on the specified position in the array and the direction of movement
+     takes an array of strings and switches two elements around depending on the specified position in the array and the direction of movement
     */
-    func switchLabels(arr: [UILabel], position: Int, directionUp: Bool) -> [UILabel] {
+    func switchStrings(arr: [String], position: Int, directionUp: Bool) -> [String] {
         
         
         var tempArr = arr
