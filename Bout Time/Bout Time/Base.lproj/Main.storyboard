@@ -53,7 +53,7 @@
                                                 </constraints>
                                                 <state key="normal" image="down_full"/>
                                                 <connections>
-                                                    <action selector="topFactButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fuI-uf-6ib"/>
+                                                    <action selector="downButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d5J-FJ-2uW"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -93,7 +93,7 @@
                                                         </constraints>
                                                         <state key="normal" image="up_half"/>
                                                         <connections>
-                                                            <action selector="secondFactUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d3O-aB-rCT"/>
+                                                            <action selector="upButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Fg-OV-Me2"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEE-Fs-IK6">
@@ -103,7 +103,7 @@
                                                         </constraints>
                                                         <state key="normal" image="down_half"/>
                                                         <connections>
-                                                            <action selector="secondFactDownButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RRa-uv-mFR"/>
+                                                            <action selector="downButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rOs-X7-NGY"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -145,7 +145,7 @@
                                                         </constraints>
                                                         <state key="normal" image="up_half"/>
                                                         <connections>
-                                                            <action selector="thirdFactUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xo5-Vk-pAj"/>
+                                                            <action selector="upButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WaV-oA-6mF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4e-NC-9O1">
@@ -155,7 +155,7 @@
                                                         </constraints>
                                                         <state key="normal" image="down_half"/>
                                                         <connections>
-                                                            <action selector="thirdFactDownButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IlP-KT-ohM"/>
+                                                            <action selector="downButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TDQ-Vt-Qrp"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -194,7 +194,7 @@
                                                 </constraints>
                                                 <state key="normal" image="up_full"/>
                                                 <connections>
-                                                    <action selector="fourthFactButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gD5-ae-GVv"/>
+                                                    <action selector="upButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cT0-5J-xMQ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -218,13 +218,13 @@
                                 <rect key="frame" x="8" y="392" width="304" height="64"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEu-id-YHh" userLabel="Next Round Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="64"/>
+                                        <rect key="frame" x="0.0" y="-49.5" width="0.0" height="163"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next_round_fail" translatesAutoresizingMaskIntoConstraints="NO" id="3nw-Ys-BpP">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="43"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="142"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap events to learn more" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-AS-wD7">
-                                                <rect key="frame" x="0.0" y="43" width="0.0" height="21"/>
+                                                <rect key="frame" x="0.0" y="142" width="0.0" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="lET-bd-CvL"/>
                                                 </constraints>

@@ -66,30 +66,48 @@ class ViewController: UIViewController {
     //MARK: - IBActions
     //-----------------
     
-    @IBAction func topFactButtonTapped(_ sender: UIButton) {
+    @IBAction func downButtonTapped(_ sender: UIButton) {
         // change button to red image
         // change any other button to yellow
         // make label at button index + 1 (mod 4) == label at button index i
         // make label at button index i == old label at button index + 1
+        factsLabels = switchLabels(arr: factsLabels, position: sender.tag, directionUp: false)
     }
     
-    @IBAction func secondFactUpButtonTapped(_ sender: UIButton) {
+    @IBAction func upButtonTapped(_ sender: UIButton) {
+        factsLabels = switchLabels(arr: factsLabels, position: sender.tag, directionUp: true)
     }
+    
+    
 
-    @IBAction func secondFactDownButtonTapped(_ sender: UIButton) {
-    }
     
-    @IBAction func thirdFactUpButtonTapped(_ sender: UIButton) {
-    }
-    
-    @IBAction func thirdFactDownButtonTapped(_ sender: UIButton) {
-    }
-    
-    @IBAction func fourthFactButtonTapped(_ sender: UIButton) {
-    }
-    
-    //MARK: - Other Methdos
+    //MARK: - Other Methods
     //---------------------
 
+    /**
+     takes an array of labels and switches two elements around depending on the specified position in the array and the direction of movement
+    */
+    func switchLabels(arr: [UILabel], position: Int, directionUp: Bool) -> [UILabel] {
+        
+        
+        var tempArr = arr
+        
+        if directionUp {
+            
+            guard position > 0 else { return arr }
+            
+            tempArr[position - 1] = arr[position]
+            tempArr[position] = arr[position - 1]
+        } else {
+            
+            guard position < arr.count - 1 else { return arr }
+            
+            tempArr[position + 1] = arr[position]
+            tempArr[position] = arr[position + 1]
+        }
+        
+        return tempArr
+    }
+    
 }
 
