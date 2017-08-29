@@ -63,6 +63,15 @@ class ViewController: UIViewController {
         
         
         resetButtonImages(buttons: buttons)
+        
+        
+        DispatchQueue.global().async {
+            //game.startGame()
+            print("loading a game in the background")
+            let game = Game(rounds: 6, secondsPerRound: 5)
+            game.testMessage()
+        }
+ 
     
     }
 

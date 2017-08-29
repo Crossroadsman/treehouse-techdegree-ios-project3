@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E347A131F55BE9F00EE7F52 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E347A121F55BE9F00EE7F52 /* TimerManager.swift */; };
+		4E347A151F55BEBD00EE7F52 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E347A141F55BEBD00EE7F52 /* Game.swift */; };
 		4E6F63A01F51E8E9001845EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F639F1F51E8E9001845EB /* AppDelegate.swift */; };
 		4E6F63A21F51E8E9001845EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F63A11F51E8E9001845EB /* ViewController.swift */; };
 		4E6F63A51F51E8E9001845EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E6F63A31F51E8E9001845EB /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E347A121F55BE9F00EE7F52 /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		4E347A141F55BEBD00EE7F52 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4E6F639C1F51E8E9001845EB /* Bout Time.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bout Time.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6F639F1F51E8E9001845EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E6F63A11F51E8E9001845EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,7 @@
 		4E3508331F529328004A8FAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4E6F63A11F51E8E9001845EB /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -52,6 +57,8 @@
 		4E3508351F529334004A8FAD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E347A121F55BE9F00EE7F52 /* TimerManager.swift */,
+				4E347A141F55BEBD00EE7F52 /* Game.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -88,7 +95,6 @@
 				4E3508341F52932E004A8FAD /* View */,
 				4E3508331F529328004A8FAD /* Controller */,
 				4E6F639F1F51E8E9001845EB /* AppDelegate.swift */,
-				4E6F63A11F51E8E9001845EB /* ViewController.swift */,
 				4E6F63A31F51E8E9001845EB /* Main.storyboard */,
 				4E6F63A81F51E8E9001845EB /* LaunchScreen.storyboard */,
 				4E6F63AB1F51E8E9001845EB /* Info.plist */,
@@ -169,8 +175,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E347A131F55BE9F00EE7F52 /* TimerManager.swift in Sources */,
 				4E6F63A21F51E8E9001845EB /* ViewController.swift in Sources */,
 				4E6F63A01F51E8E9001845EB /* AppDelegate.swift in Sources */,
+				4E347A151F55BEBD00EE7F52 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
