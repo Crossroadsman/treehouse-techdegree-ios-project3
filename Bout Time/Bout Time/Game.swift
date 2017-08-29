@@ -8,6 +8,22 @@
 
 import Foundation
 
+
+protocol GameDelegate {
+    
+    func timeRemainingDidChange()
+    func timeExpired()
+    
+    func gameDidStart()
+    func gameDidEnd()
+    
+    func roundDidStart()
+    func roundDidEnd()
+    
+    func readyForNextRound()
+    
+}
+
 class Game: TimerManagerDelegate {
     
     private var roundNumber = 0
@@ -16,8 +32,10 @@ class Game: TimerManagerDelegate {
     private var maxRounds: Int
     
     private var timerManager: TimerManager?
+    private var vc: ViewController!
     
-    init(rounds: Int, secondsPerRound: Int) {
+    init(vc: ViewController, rounds: Int, secondsPerRound: Int) {
+        self.vc = vc
         maxRounds = rounds
         self.secondsPerRound = secondsPerRound
         
@@ -27,29 +45,22 @@ class Game: TimerManagerDelegate {
     public func startGame() {
         print("starting game!")
         
+        vc.gameDidStart()
         
-        while roundNumber <= maxRounds {
+        if roundNumber <= maxRounds {
             startRound()
         }
-        
-        // gameover
     }
     
     private func startRound() {
         
         print("starting round!")
-        let timerManager = TimerManager(game: self)
+        timerManager = TimerManager(game: self, timePerRound: secondsPerRound)
         
         print("starting timer...")
-        timerManager.start()
+        timerManager!.start()
         
-        while timerManager.getRemainingTime() > 0 {
-            print("time's not up yet!")
-        }
-        
-        print("time's up!")
-        evaluateGameState()
-        
+        vc.roundDidStart()
     }
     
     private func evaluateGameState() {
@@ -61,17 +72,40 @@ class Game: TimerManagerDelegate {
         
         // increment round
         print("evaluating game state!")
+        
+        vc.roundDidEnd()
+        
         roundNumber += 1
+        if roundNumber <= maxRounds {
+            startRound()
+        } else {
+            vc.gameDidEnd()
+        }
+    }
+    
+    func readyForNextRound() {
+        evaluateGameState()
     }
     
     func testMessage() {
         print("this is a test message from the game instance")
     }
     
+    func getRemainingTime() -> Double {
+        return timerManager!.getRemainingTime()
+    }
+    
     //MARK: - TimerManagerDelegate Methods
     //------------------------------------
-    public func timerWasUpdated() {
-        print("timer was updated")
+    public func timerDidTick() {
+        print("Timer told me: Tick!")
+        vc.timeRemainingDidChange()
+        
+    }
+    
+    public func timerDidEnd() {
+        print("Timer told me: Time Up!")
+        vc.timeExpired()
     }
     
 }

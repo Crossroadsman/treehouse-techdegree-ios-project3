@@ -9,18 +9,21 @@
 import Foundation
 
 protocol TimerManagerDelegate {
-    func timerWasUpdated()
+    func timerDidTick()
+    func timerDidEnd()
 }
 
 
 // note Timer is a class provided by Apple
 class TimerManager {
-    private var timeRemaining = 60.0
+    private var timeRemaining: Double = 0.0
     private var timer = Timer()
     private var game: Game
+    private let timePerRound: Double
     
-    init(game: Game) {
+    init(game: Game, timePerRound: Int) {
         self.game = game
+        self.timePerRound = Double(timePerRound)
     }
     
     // use the Timer class's scheduleTimer method
@@ -28,10 +31,16 @@ class TimerManager {
     // which calls the specified function/closure every time
     // the timer fires
     public func start() {
-        // set up timer
+        print("starting timer")
+        timeRemaining = timePerRound
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {
-            (t: Timer) in self.update(t)
+            
+            (t: Timer) in
+            print("timer has been set up, calling update")
+            self.update(t)
         })
+        
     }
     
     private func update(_ timer: Timer) {
@@ -42,8 +51,11 @@ class TimerManager {
         
         if timeRemaining <= 0 {
             timer.invalidate()
+            game.timerDidEnd()
+        } else {
+            game.timerDidTick()
         }
-        game.timerWasUpdated()
+        
     }
     
     /**

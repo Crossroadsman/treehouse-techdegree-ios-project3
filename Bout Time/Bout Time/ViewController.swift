@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GameDelegate {
     
     
     //MARK: - Properties
@@ -44,6 +44,8 @@ class ViewController: UIViewController {
     var labelTexts = [String]()
     var buttons = [UIButton]()
     
+    var game: Game!
+    
     
     //MARK: - View Controller Methods
     //-------------------------------
@@ -64,14 +66,10 @@ class ViewController: UIViewController {
         
         resetButtonImages(buttons: buttons)
         
-        
-        DispatchQueue.global().async {
-            //game.startGame()
-            print("loading a game in the background")
-            let game = Game(rounds: 6, secondsPerRound: 5)
-            game.testMessage()
-        }
- 
+        game = Game(vc: self, rounds: 6, secondsPerRound: 5)
+        game.testMessage()
+        game.startGame()
+
     
     }
 
@@ -115,7 +113,37 @@ class ViewController: UIViewController {
         
     }
     
+    //MARK: - GameDelegate Methods
+    //----------------------------
+    func timeRemainingDidChange() {
+        updateTimeRemainingLabel()
+    }
     
+    func timeExpired() {
+        updateTimeRemainingLabel(timeUp: true)
+        //readyForNextRound()
+    }
+    
+    func gameDidStart() {
+        print("Game told me that the game did start")
+    }
+    
+    func gameDidEnd() {
+        print("Game told me that the game did end")
+    }
+    
+    func roundDidStart() {
+        print("Game told me that the round did start")
+        updateTimeRemainingLabel()
+    }
+    
+    func roundDidEnd() {
+        print("game told me that the round did end")
+    }
+    
+    func readyForNextRound() {
+        game.readyForNextRound()
+    }
 
     
     //MARK: - Other Methods
@@ -180,6 +208,16 @@ class ViewController: UIViewController {
             let isUp = index % 2 == 1
             
             updateButtonImage(button: button, selected: false, isUp: isUp)
+        }
+        
+    }
+    
+    func updateTimeRemainingLabel(timeUp: Bool = false) {
+        if timeUp {
+            timeRemainingLabel.text = "0"
+        } else {
+            let timeRemaining = Int(game.getRemainingTime())
+            timeRemainingLabel.text = "\(timeRemaining)"
         }
         
     }
