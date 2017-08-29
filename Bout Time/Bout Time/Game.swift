@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 protocol GameDelegate {
     
     func timeRemainingDidChange()
