@@ -99,12 +99,8 @@ class Game: TimerManagerDelegate {
         }
     }
     
-    func readyForNextRound() {
+    public func readyForNextRound() {
         evaluateGameState()
-    }
-    
-    func testMessage() {
-        print("this is a test message from the game instance")
     }
     
     public func getRemainingTime() -> Double {

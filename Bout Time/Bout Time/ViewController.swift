@@ -54,20 +54,28 @@ class ViewController: UIViewController, GameDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        buttons = [topFactButton, secondFactUpButton, secondFactDownButton, thirdFactUpButton, thirdFactDownButton, fourthFactButton]
+        buttons = [topFactButton,
+                   secondFactUpButton,
+                   secondFactDownButton,
+                   thirdFactUpButton,
+                   thirdFactDownButton,
+                   fourthFactButton]
         
         
-        factsLabels = [topFactLabel, secondFactLabel, thirdFactLabel, fourthFactLabel]
-        labelTexts = ["Sputnick was launched by the USSR",
-                      "Roger Maris broke the Babe's HR record",
-                      "Start of the Korean War",
-                      "George McFly first kisses Lorraine"]
+        factsLabels = [topFactLabel,
+                       secondFactLabel,
+                       thirdFactLabel,
+                       fourthFactLabel]
+        
+        labelTexts = ["Loading facts...",
+                      "Loading facts...",
+                      "Loading facts...",
+                      "Loading facts..."]
         
         
         resetButtonImages(buttons: buttons)
         
         game = Game(vc: self, rounds: 6, secondsPerRound: 5)
-        game.testMessage()
         game.startGame()
 
     
@@ -134,12 +142,27 @@ class ViewController: UIViewController, GameDelegate {
     
     func roundDidStart() {
         print("Game told me that the round did start")
+        //show timer
+        //show shake instructions
+        //hide tap-to-show-webview button
+        //hide result image
+        //enable shake
+        
+        
         loadLabelStrings()
         updateTimeRemainingLabel()
     }
     
     func roundDidEnd() {
         print("game told me that the round did end")
+        // evaluate result
+        
+        // hide timer
+        // hide shake instruction
+        // show tap-to-show-webview button
+        // show result image
+        // disable shake
+        
     }
     
     func readyForNextRound() {
