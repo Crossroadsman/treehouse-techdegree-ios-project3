@@ -10,9 +10,8 @@ import Foundation
 
 protocol GameDelegate {
     
-    func timeRemainingDidChange()
-    func timeExpired()
-    
+    //MARK: - Universal game functions
+    //--------------------------------
     func gameDidStart()
     func gameDidEnd()
     
@@ -20,6 +19,19 @@ protocol GameDelegate {
     func roundDidEnd()
     
     func readyForNextRound()
+    
+    
+    //MARK: - Typical game functions
+    //------------------------------
+    func timeRemainingDidChange()
+    func timeExpired()
+    func getRemainingTime() -> Double
+    
+    
+    //MARK: - Bout Time specific game functions
+    //-----------------------------------------
+    func getEventStrings() -> [String]
+    
     
 }
 
@@ -30,6 +42,7 @@ class Game: TimerManagerDelegate {
     private var secondsPerRound: Int
     private var maxRounds: Int
     
+    private var round: Round?
     private var timerManager: TimerManager?
     private var vc: ViewController!
     
@@ -54,6 +67,10 @@ class Game: TimerManagerDelegate {
     private func startRound() {
         
         print("starting round!")
+        round = Round()
+        
+        vc.roundDidStart()
+        
         timerManager = TimerManager(game: self, timePerRound: secondsPerRound)
         
         print("starting timer...")
@@ -90,8 +107,17 @@ class Game: TimerManagerDelegate {
         print("this is a test message from the game instance")
     }
     
-    func getRemainingTime() -> Double {
+    public func getRemainingTime() -> Double {
+        
+        guard timerManager != nil else {
+            return Double(secondsPerRound)
+        }
+        
         return timerManager!.getRemainingTime()
+    }
+    
+    public func getEventStrings() -> [String] {
+        return round!.getEventStrings()
     }
     
     //MARK: - TimerManagerDelegate Methods

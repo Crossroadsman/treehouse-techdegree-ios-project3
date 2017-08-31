@@ -134,6 +134,7 @@ class ViewController: UIViewController, GameDelegate {
     
     func roundDidStart() {
         print("Game told me that the round did start")
+        loadLabelStrings()
         updateTimeRemainingLabel()
     }
     
@@ -144,10 +145,26 @@ class ViewController: UIViewController, GameDelegate {
     func readyForNextRound() {
         game.readyForNextRound()
     }
+    
+    func getEventStrings() -> [String] {
+        return game.getEventStrings()
+    }
+    
+    func getRemainingTime() -> Double {
+        return game.getRemainingTime()
+    }
 
     
     //MARK: - Other Methods
     //---------------------
+    
+    func loadLabelStrings() {
+        labelTexts = getEventStrings()
+        
+        for (index, label) in factsLabels.enumerated() {
+            label.text = labelTexts[index]
+        }
+    }
 
     /**
      takes an array of strings and switches two elements around depending on the specified position in the array and the direction of movement
@@ -213,10 +230,11 @@ class ViewController: UIViewController, GameDelegate {
     }
     
     func updateTimeRemainingLabel(timeUp: Bool = false) {
+        
         if timeUp {
             timeRemainingLabel.text = "0"
         } else {
-            let timeRemaining = Int(game.getRemainingTime())
+            let timeRemaining = Int(getRemainingTime())
             timeRemainingLabel.text = "\(timeRemaining)"
         }
         
