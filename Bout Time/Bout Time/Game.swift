@@ -35,6 +35,13 @@ protocol GameDelegate {
     
 }
 
+enum GameState {
+    case inRound
+    case correct
+    case incorrect
+    case gameOver
+}
+
 class Game: TimerManagerDelegate {
     
     private var roundNumber = 0
@@ -45,6 +52,8 @@ class Game: TimerManagerDelegate {
     private var round: Round?
     private var timerManager: TimerManager?
     private var vc: ViewController!
+    
+    private var gameState: GameState = .gameOver
     
     init(vc: ViewController, rounds: Int, secondsPerRound: Int) {
         self.vc = vc
@@ -68,10 +77,11 @@ class Game: TimerManagerDelegate {
         
         print("starting round!")
         round = Round()
-        
+        gameState = .inRound
         vc.roundDidStart()
         
-        timerManager = TimerManager(game: self, timePerRound: secondsPerRound)
+        timerManager = TimerManager(timePerRound: secondsPerRound)
+        timerManager!.delegate = self
         
         print("starting timer...")
         timerManager!.start()
@@ -83,6 +93,12 @@ class Game: TimerManagerDelegate {
         // if game conditions are correct:
         // - increment score
         
+        if round!.eventsAreInOrder(vc.getLabelTexts()) {
+            gameState = .correct
+        } else {
+            gameState = .incorrect
+        }
+        
         // if game conditions are incorrect:
         // - do not increment score
         
@@ -93,14 +109,20 @@ class Game: TimerManagerDelegate {
         
         roundNumber += 1
         if roundNumber <= maxRounds {
-            startRound()
+            //startRound()
         } else {
+            gameState = .gameOver
             vc.gameDidEnd()
         }
     }
     
     public func readyForNextRound() {
-        evaluateGameState()
+        switch gameState {
+        case .correct, .incorrect:
+            startRound()
+        default:
+            print("not in valid state to start round")
+        }
     }
     
     public func getRemainingTime() -> Double {
@@ -116,6 +138,18 @@ class Game: TimerManagerDelegate {
         return round!.getEventStrings()
     }
     
+    public func getGameState() -> GameState {
+        return gameState
+    }
+    
+    public func getScore() -> Int {
+        return score
+    }
+    
+    public func userDidEndRound() {
+        evaluateGameState()
+    }
+    
     //MARK: - TimerManagerDelegate Methods
     //------------------------------------
     public func timerDidTick() {
@@ -126,6 +160,7 @@ class Game: TimerManagerDelegate {
     
     public func timerDidEnd() {
         print("Timer told me: Time Up!")
+        evaluateGameState()
         vc.timeExpired()
     }
     

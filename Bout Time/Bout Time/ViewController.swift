@@ -14,6 +14,7 @@ class ViewController: UIViewController, GameDelegate {
     //MARK: - Properties
     //------------------
     
+    //MARK: IBOutlets
     @IBOutlet weak var topFactLabel: UILabel!
     @IBOutlet weak var topFactButton: UIButton!
     
@@ -32,7 +33,7 @@ class ViewController: UIViewController, GameDelegate {
     
     @IBOutlet weak var timeRemainingStackView: UIStackView!
     
-    @IBOutlet weak var nextRoundWithStatusImageView: UIImageView!
+    @IBOutlet weak var nextRoundWithStatusButton: UIButton!
     
     @IBOutlet weak var timeRemainingLabel: UILabel!
     
@@ -40,12 +41,16 @@ class ViewController: UIViewController, GameDelegate {
         return true
     }
     
-    var factsLabels = [UILabel]()
-    var labelTexts = [String]()
-    var buttons = [UIButton]()
+    //MARK: UI Element groups
+    private var factsLabels = [UILabel]()
+    private var labelTexts = [String]()
+    private var buttons = [UIButton]()
     
-    var game: Game!
+    //MARK: Other properties
+    private var game: Game!
     
+    private var shakeEnabled = false
+
     
     //MARK: - View Controller Methods
     //-------------------------------
@@ -67,13 +72,14 @@ class ViewController: UIViewController, GameDelegate {
                        thirdFactLabel,
                        fourthFactLabel]
         
-        labelTexts = ["Loading facts...",
-                      "Loading facts...",
-                      "Loading facts...",
-                      "Loading facts..."]
+        labelTexts = [" ",
+                      " ",
+                      " ",
+                      " "]
         
         
         resetButtonImages(buttons: buttons)
+        setButtonsEnabledStatus(false)
         
         game = Game(vc: self, rounds: 6, secondsPerRound: 5)
         game.startGame()
@@ -88,6 +94,7 @@ class ViewController: UIViewController, GameDelegate {
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         print("Shake detected")
+        game.userDidEndRound()
     }
     
     
@@ -116,9 +123,18 @@ class ViewController: UIViewController, GameDelegate {
         for (index, label) in factsLabels.enumerated() {
             label.text = labelTexts[index]
         }
-        
-        
-        
+    }
+    
+    @IBAction func nextRoundButtonTapped(_ sender: UIButton) {
+        switch game.getGameState() {
+        case .gameOver:
+            print("\(game.getScore)")
+            viewDidLoad()
+        case .correct, .incorrect:
+            game.readyForNextRound()
+        case .inRound:
+            print("should not be able to tap next round button if game state is inRound")
+        }
     }
     
     //MARK: - GameDelegate Methods
@@ -129,7 +145,6 @@ class ViewController: UIViewController, GameDelegate {
     
     func timeExpired() {
         updateTimeRemainingLabel(timeUp: true)
-        //readyForNextRound()
     }
     
     func gameDidStart() {
@@ -142,11 +157,16 @@ class ViewController: UIViewController, GameDelegate {
     
     func roundDidStart() {
         print("Game told me that the round did start")
+        setButtonsEnabledStatus(true)
+        
         //show timer
         //show shake instructions
         //hide tap-to-show-webview button
         //hide result image
+        toggleFooterDisplay()
+        
         //enable shake
+        shakeEnabled = true
         
         
         loadLabelStrings()
@@ -155,13 +175,16 @@ class ViewController: UIViewController, GameDelegate {
     
     func roundDidEnd() {
         print("game told me that the round did end")
-        // evaluate result
+        setButtonsEnabledStatus(false)
         
         // hide timer
         // hide shake instruction
         // show tap-to-show-webview button
         // show result image
+        toggleFooterDisplay()
+        
         // disable shake
+        shakeEnabled = false
         
     }
     
@@ -261,6 +284,39 @@ class ViewController: UIViewController, GameDelegate {
             timeRemainingLabel.text = "\(timeRemaining)"
         }
         
+    }
+    
+    func toggleFooterDisplay() {
+        if nextRoundStackView.isHidden { // round is live
+            timeRemainingStackView.isHidden = true
+            nextRoundStackView.isHidden = false
+            
+        } else { // round is over
+            
+            switch game.getGameState() {
+            case .gameOver:
+                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "play_again"), for: .normal)
+            case .correct:
+                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
+            case .incorrect:
+                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
+            case .inRound:
+                print("game is in round")
+            }
+
+            nextRoundStackView.isHidden = true
+            timeRemainingStackView.isHidden = false
+        }
+    }
+    
+    public func getLabelTexts() -> [String] {
+        return labelTexts
+    }
+    
+    private func setButtonsEnabledStatus(_ status: Bool) {
+        buttons.forEach {
+            $0.isEnabled = status
+        }
     }
     
     

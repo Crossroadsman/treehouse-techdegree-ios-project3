@@ -18,11 +18,11 @@ protocol TimerManagerDelegate {
 class TimerManager {
     private var timeRemaining: Double = 0.0
     private var timer = Timer()
-    private var game: Game
     private let timePerRound: Double
     
-    init(game: Game, timePerRound: Int) {
-        self.game = game
+    public var delegate: TimerManagerDelegate?
+    
+    init(timePerRound: Int) {
         self.timePerRound = Double(timePerRound)
     }
     
@@ -51,9 +51,9 @@ class TimerManager {
         
         if timeRemaining <= 0 {
             timer.invalidate()
-            game.timerDidEnd()
+            delegate?.timerDidEnd()
         } else {
-            game.timerDidTick()
+            delegate?.timerDidTick()
         }
         
     }
