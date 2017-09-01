@@ -44,6 +44,14 @@ enum GameState {
 
 class Game: TimerManagerDelegate {
     
+    
+    //MARK: - Properties
+    //------------------
+    
+    //MARK: Delegate properties
+    public var timerWasInterrupted: Bool = false
+    
+    //MARK: Other properties
     private var roundNumber = 0
     private var score = 0
     private var secondsPerRound: Int = 60
@@ -71,6 +79,23 @@ class Game: TimerManagerDelegate {
         
     }
     
+    //MARK: - Methods
+    //---------------
+
+    //MARK: TimerManagerDelegate Methods
+    public func timerDidTick() {
+        print("Timer told me: Tick!")
+        delegate.timeRemainingDidChange()
+        
+    }
+    
+    public func timerDidEnd() {
+        print("Timer told me: Time Up!")
+        evaluateGameState()
+        delegate.timeExpired()
+    }
+    
+    //MARK: Other Methods
     private func startRound() {
         
         print("GAME: starting round!")
@@ -149,21 +174,9 @@ class Game: TimerManagerDelegate {
     }
     
     public func userDidEndRound() {
+        timerWasInterrupted = true
         evaluateGameState()
     }
     
-    //MARK: - TimerManagerDelegate Methods
-    //------------------------------------
-    public func timerDidTick() {
-        print("Timer told me: Tick!")
-        delegate.timeRemainingDidChange()
-        
-    }
-    
-    public func timerDidEnd() {
-        print("Timer told me: Time Up!")
-        evaluateGameState()
-        delegate.timeExpired()
-    }
     
 }

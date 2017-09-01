@@ -33,7 +33,12 @@ struct Round {
     }
     
     public func eventsAreInOrder(_ events: [String]) -> Bool {
-        return events == roundData.map {$0.getName()}
+        let correctAnswers = roundData.map {$0.getName()}
+        
+        print("answers given: \(events)")
+        print("actual answers: \(correctAnswers)")
+        
+        return events == correctAnswers
     }
     
     public func getUrlFor(event: String) -> URL? {

@@ -17,8 +17,6 @@ let simplifiedData = [
     ("Alonzo Townsend Cross born", 1846, "https://crossroadsman.github.io/pen-facts/#A-T-Cross"),
     ("Cross went public on the American Stock Exchange", 1972, "https://crossroadsman.github.io/pen-facts/#A-T-Cross"),
     ("August Eberstein founded the Simplizissimus-Füllhalter company in Berlin", 1906, "hhttps://www.gentlemansgazette.com/montblanc-meisterstuck-fountain-pen/"),
-    ("August Eberstein founded the Simplizissimus-Füllhalter company in Berlin", 1906, "hhttps://www.gentlemansgazette.com/montblanc-meisterstuck-fountain-pen/"),
-    ("August Eberstein founded the Simplizissimus-Füllhalter company in Berlin", 1906, "https://www.gentlemansgazette.com/montblanc-meisterstuck-fountain-pen/"),
     ("Montblanc first put a white tip on the cap of its pens", 1910, "https://www.collectorsweekly.com/pens/montblanc"),
     ("Montblanc introduces the Meisterstück branding", 1924, "https://www.collectorsweekly.com/pens/montblanc"),
     ("Montblanc introduces the 'star' logo to symbolize the snow-covered tip of Mont Blanc", 1910, "https://www.gentlemansgazette.com/montblanc-meisterstuck-fountain-pen/"),

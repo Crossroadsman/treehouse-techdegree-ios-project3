@@ -9,8 +9,12 @@
 import Foundation
 
 protocol TimerManagerDelegate {
+    
+    var timerWasInterrupted: Bool { get set }
+    
     func timerDidTick()
     func timerDidEnd()
+    
 }
 
 
@@ -26,10 +30,10 @@ class TimerManager {
         self.timePerRound = Double(timePerRound)
     }
     
-    // use the Timer class's scheduleTimer method
-    // to start the timer with the specified interval (in s)
-    // which calls the specified function/closure every time
-    // the timer fires
+    /// use the Timer class's scheduleTimer method
+    /// to start the timer with the specified interval (in s)
+    /// which calls the specified function/closure every time
+    /// the timer fires
     public func start() {
         print("starting timer")
         timeRemaining = timePerRound
@@ -43,19 +47,30 @@ class TimerManager {
         
     }
     
+    /**
+     Updates the time remaining property and, providing there is a delegate,
+     invalidates the timer when the timer ends and notifies the delegate that
+     timer ticked or ended
+    */
     private func update(_ timer: Timer) {
         print("updating timer")
         print("timer value was \(timeRemaining)")
         timeRemaining -= timer.timeInterval.magnitude
         print("timer now: \(timeRemaining)")
         
-        if timeRemaining <= 0 {
-            timer.invalidate()
-            delegate?.timerDidEnd()
-        } else {
-            delegate?.timerDidTick()
+        guard delegate != nil else {
+            return
         }
         
+        if delegate!.timerWasInterrupted {
+            delegate!.timerWasInterrupted = false
+            timer.invalidate()
+        } else if timeRemaining <= 0 {
+            timer.invalidate()
+            delegate!.timerDidEnd()
+        } else {
+            delegate!.timerDidTick()
+        }
     }
     
     /**
@@ -64,4 +79,5 @@ class TimerManager {
     public func getRemainingTime() -> Double {
         return timeRemaining
     }
+    
 }
