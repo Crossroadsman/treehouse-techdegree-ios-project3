@@ -137,6 +137,17 @@ class ViewController: UIViewController, GameDelegate {
         }
     }
     
+    @IBAction func tapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
+        
+        if game.getGameState() != .inRound {
+            print(sender.view?.tag)
+        }
+        
+        
+    }
+    
+    
+    
     //MARK: - GameDelegate Methods
     //----------------------------
     func timeRemainingDidChange() {
