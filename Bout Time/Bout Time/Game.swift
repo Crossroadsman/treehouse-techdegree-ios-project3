@@ -46,7 +46,7 @@ class Game: TimerManagerDelegate {
     
     private var roundNumber = 0
     private var score = 0
-    private var secondsPerRound: Int = 5
+    private var secondsPerRound: Int = 60
     private let maxRounds: Int = 6
     
     private var round: Round?
@@ -57,27 +57,37 @@ class Game: TimerManagerDelegate {
     public var delegate: GameDelegate!
     
     public func startGame() {
-        print("starting game!")
+        print("GAME: starting game!")
         
+        print("GAME: notifying vc that gameDidStart")
         delegate.gameDidStart()
         
+        print("GAME: checking that not all rounds have elapsed...")
         if roundNumber <= maxRounds {
+            print("... they have not")
+            print("GAME: starting round")
             startRound()
         }
+        
     }
     
     private func startRound() {
         
-        print("starting round!")
+        print("GAME: starting round!")
+        print("GAME: creating Round instance")
         round = Round()
+        
+        print("GAME: setting gameState to .inRound")
         gameState = .inRound
 
+        print("GAME: configuring timer")
         timerManager = TimerManager(timePerRound: secondsPerRound)
         timerManager!.delegate = self
         
-        print("starting timer...")
+        print("GAME: starting timer...")
         timerManager!.start()
         
+        print("GAME: notifying view controller that round has started")
         delegate.roundDidStart()
     }
     

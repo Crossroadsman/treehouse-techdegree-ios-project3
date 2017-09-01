@@ -57,7 +57,21 @@ class GameViewController: UIViewController, GameDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        buttons = [topFactButton,
+                   secondFactUpButton,
+                   secondFactDownButton,
+                   thirdFactUpButton,
+                   thirdFactDownButton,
+                   fourthFactButton]
+        
+        
+        factsLabels = [topFactLabel,
+                       secondFactLabel,
+                       thirdFactLabel,
+                       fourthFactLabel]
+        
+        
         startNewGame()
         
     }
@@ -167,7 +181,8 @@ class GameViewController: UIViewController, GameDelegate {
     }
     
     func gameDidStart() {
-        print("Game told me that the game did start")
+        // currently no specific behaviours required for the view controller when the game has started
+        print("GVC: Game told me that the game did start")
     }
     
     func gameDidEnd() {
@@ -183,7 +198,7 @@ class GameViewController: UIViewController, GameDelegate {
         //show shake instructions
         //hide tap-to-show-webview button
         //hide result image
-        toggleFooterDisplay()
+        setFooterDisplay()
         
         //enable shake
         shakeEnabled = true
@@ -201,7 +216,7 @@ class GameViewController: UIViewController, GameDelegate {
         // hide shake instruction
         // show tap-to-show-webview button
         // show result image
-        toggleFooterDisplay()
+        setFooterDisplay()
         
         // disable shake
         shakeEnabled = false
@@ -306,26 +321,32 @@ class GameViewController: UIViewController, GameDelegate {
         
     }
     
-    func toggleFooterDisplay() {
-        if nextRoundStackView.isHidden { // round is live
-            timeRemainingStackView.isHidden = true
-            nextRoundStackView.isHidden = false
-            
-        } else { // round is over
-            
-            switch game.getGameState() {
-            case .gameOver:
-                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "play_again"), for: .normal)
-            case .correct:
-                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
-            case .incorrect:
-                nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
-            case .inRound:
-                print("game is in round")
-            }
-
-            nextRoundStackView.isHidden = true
+    private func setFooterDisplay() {
+        
+        switch game.getGameState() {
+        case .inRound:
+            // should display timeRemainingStackView and hide nextRoundStackView
             timeRemainingStackView.isHidden = false
+            nextRoundStackView.isHidden = true
+            
+        case .correct:
+            // should display nextRoundStackView with 'success' image
+            // and hide timeRemainingStackView
+            nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
+            nextRoundStackView.isHidden = false
+            timeRemainingStackView.isHidden = true
+            
+        case .incorrect:
+            // should display nextRoundStackView with 'fail' image
+            // and hide timeRemainingStackView
+            nextRoundWithStatusButton.setImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
+            nextRoundStackView.isHidden = false
+            timeRemainingStackView.isHidden = true
+
+            
+        case .gameOver:
+            // shouldn't matter: view will segue to gameoverviewcontroller
+            print("GVC: setFooterDisplay doesn't need to do anything, game is over")
         }
     }
     
@@ -340,18 +361,6 @@ class GameViewController: UIViewController, GameDelegate {
     }
     
     public func startNewGame() {
-        buttons = [topFactButton,
-                   secondFactUpButton,
-                   secondFactDownButton,
-                   thirdFactUpButton,
-                   thirdFactDownButton,
-                   fourthFactButton]
-        
-        
-        factsLabels = [topFactLabel,
-                       secondFactLabel,
-                       thirdFactLabel,
-                       fourthFactLabel]
         
         labelTexts = [" ",
                       " ",
