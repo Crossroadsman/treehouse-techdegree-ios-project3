@@ -84,10 +84,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dU7-ws-DKV" userLabel="Facts Stack">
                                 <rect key="frame" x="20" y="36" width="374" height="600"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-mb-yBt" userLabel="Top Fact">
+                                    <stackView contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="JWd-mb-yBt" userLabel="Top Fact">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="144"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dad-ih-2ud">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dad-ih-2ud" customClass="RoundedCornerView" customModule="Bout_Time" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="144"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sputnick was launched by the USSR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="omS-b0-1hx">
@@ -119,6 +119,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="V3l-pe-ZtB" firstAttribute="height" secondItem="JWd-mb-yBt" secondAttribute="height" id="ZtK-y7-c9t"/>
@@ -279,6 +280,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="JWd-mb-yBt" firstAttribute="width" secondItem="dU7-ws-DKV" secondAttribute="width" id="FiM-T1-Wnj"/>
                                     <constraint firstItem="3Qa-ye-9tu" firstAttribute="width" secondItem="JWd-mb-yBt" secondAttribute="width" id="H35-qE-QSZ"/>
