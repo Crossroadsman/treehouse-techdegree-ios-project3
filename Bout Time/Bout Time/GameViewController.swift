@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GameViewController.swift
 //  Bout Time
 //
 //  Created by Alex Koumparos on 26/08/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, GameDelegate {
+class GameViewController: UIViewController, GameDelegate {
     
     
     //MARK: - Properties
@@ -58,35 +58,11 @@ class ViewController: UIViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        startNewGame()
         
-        buttons = [topFactButton,
-                   secondFactUpButton,
-                   secondFactDownButton,
-                   thirdFactUpButton,
-                   thirdFactDownButton,
-                   fourthFactButton]
-        
-        
-        factsLabels = [topFactLabel,
-                       secondFactLabel,
-                       thirdFactLabel,
-                       fourthFactLabel]
-        
-        labelTexts = [" ",
-                      " ",
-                      " ",
-                      " "]
-        
-        
-        resetButtonImages(buttons: buttons)
-        setButtonsEnabledStatus(false)
-        
-        game = Game(vc: self, rounds: 6, secondsPerRound: 5)
-        game.startGame()
-
-    
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,8 +70,28 @@ class ViewController: UIViewController, GameDelegate {
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         print("Shake detected")
-        game.userDidEndRound()
+        
+        if shakeEnabled {
+            game.userDidEndRound()
+        }
     }
+    
+    
+    //MARK: - Navigation Methods
+    //--------------------------
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            switch id {
+                case "toGameOverViewController":
+                let destination = segue.destination as! GameOverViewController
+                destination.numerator = 1
+                destination.denominator = 6
+            default:
+                print("unknown destination")
+            }
+        }
+    }
+    
     
     
     //MARK: - IBActions
@@ -146,7 +142,19 @@ class ViewController: UIViewController, GameDelegate {
         
     }
     
-    
+    @IBAction func unwindToGameViewController(segue: UIStoryboardSegue) {
+        
+        if let id = segue.identifier {
+            switch id {
+                case "unwindToGameViewControllerFromGameOverViewController":
+                startNewGame()
+            default :
+                print("came from some other segue")
+            }
+        }
+        
+        
+    }
     
     //MARK: - GameDelegate Methods
     //----------------------------
@@ -164,6 +172,7 @@ class ViewController: UIViewController, GameDelegate {
     
     func gameDidEnd() {
         print("Game told me that the game did end")
+        performSegue(withIdentifier: "toGameOverViewController", sender: self)
     }
     
     func roundDidStart() {
@@ -328,6 +337,36 @@ class ViewController: UIViewController, GameDelegate {
         buttons.forEach {
             $0.isEnabled = status
         }
+    }
+    
+    public func startNewGame() {
+        buttons = [topFactButton,
+                   secondFactUpButton,
+                   secondFactDownButton,
+                   thirdFactUpButton,
+                   thirdFactDownButton,
+                   fourthFactButton]
+        
+        
+        factsLabels = [topFactLabel,
+                       secondFactLabel,
+                       thirdFactLabel,
+                       fourthFactLabel]
+        
+        labelTexts = [" ",
+                      " ",
+                      " ",
+                      " "]
+        
+        
+        resetButtonImages(buttons: buttons)
+        setButtonsEnabledStatus(false)
+        
+        game = Game()
+        game.delegate = self
+        game.startGame()
+        
+        
     }
     
     

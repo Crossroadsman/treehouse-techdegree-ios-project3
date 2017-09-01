@@ -30,8 +30,8 @@ protocol GameDelegate {
     
     //MARK: - Bout Time specific game functions
     //-----------------------------------------
-    func getEventStrings() -> [String]
-    
+    func getEventStrings() -> [String] // for delegate to receive the array of event names
+    func getLabelTexts() -> [String] // for Game to receive the array of label texts
     
 }
 
@@ -46,27 +46,20 @@ class Game: TimerManagerDelegate {
     
     private var roundNumber = 0
     private var score = 0
-    private var secondsPerRound: Int
-    private var maxRounds: Int
+    private var secondsPerRound: Int = 5
+    private let maxRounds: Int = 6
     
     private var round: Round?
     private var timerManager: TimerManager?
-    private var vc: ViewController!
     
     private var gameState: GameState = .gameOver
     
-    init(vc: ViewController, rounds: Int, secondsPerRound: Int) {
-        self.vc = vc
-        maxRounds = rounds
-        self.secondsPerRound = secondsPerRound
-        
-    }
-    
+    public var delegate: GameDelegate!
     
     public func startGame() {
         print("starting game!")
         
-        vc.gameDidStart()
+        delegate.gameDidStart()
         
         if roundNumber <= maxRounds {
             startRound()
@@ -78,22 +71,21 @@ class Game: TimerManagerDelegate {
         print("starting round!")
         round = Round()
         gameState = .inRound
-        vc.roundDidStart()
-        
+
         timerManager = TimerManager(timePerRound: secondsPerRound)
         timerManager!.delegate = self
         
         print("starting timer...")
         timerManager!.start()
         
-        vc.roundDidStart()
+        delegate.roundDidStart()
     }
     
     private func evaluateGameState() {
         // if game conditions are correct:
         // - increment score
         
-        if round!.eventsAreInOrder(vc.getLabelTexts()) {
+        if round!.eventsAreInOrder(delegate.getLabelTexts()) {
             gameState = .correct
         } else {
             gameState = .incorrect
@@ -105,14 +97,14 @@ class Game: TimerManagerDelegate {
         // increment round
         print("evaluating game state!")
         
-        vc.roundDidEnd()
+        delegate.roundDidEnd()
         
         roundNumber += 1
         if roundNumber <= maxRounds {
             //startRound()
         } else {
             gameState = .gameOver
-            vc.gameDidEnd()
+            delegate.gameDidEnd()
         }
     }
     
@@ -154,14 +146,14 @@ class Game: TimerManagerDelegate {
     //------------------------------------
     public func timerDidTick() {
         print("Timer told me: Tick!")
-        vc.timeRemainingDidChange()
+        delegate.timeRemainingDidChange()
         
     }
     
     public func timerDidEnd() {
         print("Timer told me: Time Up!")
         evaluateGameState()
-        vc.timeExpired()
+        delegate.timeExpired()
     }
     
 }
