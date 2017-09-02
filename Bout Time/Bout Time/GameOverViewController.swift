@@ -18,6 +18,10 @@ class GameOverViewController: UIViewController {
     
     var numerator: Int!
     var denominator: Int!
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     
     //MARK: - ViewController Methods
@@ -25,6 +29,10 @@ class GameOverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let numerator = numerator, let denominator = denominator else {
+            fatalError("Unable to resolve score")
+        }
         
         scoreLabel.text = "\(numerator)/\(denominator)"
         

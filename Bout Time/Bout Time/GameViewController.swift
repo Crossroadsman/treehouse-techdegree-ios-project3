@@ -98,8 +98,8 @@ class GameViewController: UIViewController, GameDelegate {
             switch id {
                 case "toGameOverViewController":
                 let destination = segue.destination as! GameOverViewController
-                destination.numerator = 1
-                destination.denominator = 6
+                destination.numerator = game.getScore()
+                destination.denominator = game.getMaximumRounds()
                 
                 case "toWebViewViewController":
                 let destination = segue.destination as! WebViewViewController

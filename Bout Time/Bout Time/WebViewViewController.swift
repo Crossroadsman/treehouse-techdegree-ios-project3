@@ -19,6 +19,10 @@ class WebViewViewController: UIViewController {
     
     var url: URL!
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
     //MARK: - View Controller Methods
     //-------------------------------

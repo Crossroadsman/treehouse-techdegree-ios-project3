@@ -122,6 +122,7 @@ class Game: TimerManagerDelegate {
         
         if round!.eventsAreInOrder(delegate.getLabelTexts()) {
             gameState = .correct
+            score += 1
         } else {
             gameState = .incorrect
         }
@@ -176,6 +177,10 @@ class Game: TimerManagerDelegate {
     public func userDidEndRound() {
         timerWasInterrupted = true
         evaluateGameState()
+    }
+    
+    public func getMaximumRounds() -> Int {
+        return maxRounds
     }
     
     public func getUrlFor(event: String) -> URL? {
