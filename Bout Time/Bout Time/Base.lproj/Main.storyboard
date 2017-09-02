@@ -320,10 +320,9 @@ Use the buttons to arrange the historical facts in order from oldest to newest.<
                                 <rect key="frame" x="8" y="392" width="304" height="64"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEu-id-YHh" userLabel="Next Round Stack">
-                                        <rect key="frame" x="0.0" y="-49.5" width="0.0" height="163"/>
+                                        <rect key="frame" x="0.0" y="21.5" width="0.0" height="21"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVd-bk-UCp">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="142"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rVd-bk-UCp" secondAttribute="height" multiplier="558:142" id="G8m-a8-Gby"/>
                                                 </constraints>
@@ -333,7 +332,7 @@ Use the buttons to arrange the historical facts in order from oldest to newest.<
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap events to learn more" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-AS-wD7">
-                                                <rect key="frame" x="0.0" y="142" width="0.0" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="lET-bd-CvL"/>
                                                 </constraints>
@@ -366,7 +365,7 @@ Use the buttons to arrange the historical facts in order from oldest to newest.<
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="OU3-2P-Neu"/>
-                                    <constraint firstItem="iEu-id-YHh" firstAttribute="centerX" secondItem="Z4W-Rx-twu" secondAttribute="centerX" id="h0J-Ym-acZ"/>
+                                    <constraint firstItem="iEu-id-YHh" firstAttribute="centerX" secondItem="Z4W-Rx-twu" secondAttribute="centerX" priority="999" id="h0J-Ym-acZ"/>
                                     <constraint firstItem="Pw0-Sj-XTM" firstAttribute="centerX" secondItem="Z4W-Rx-twu" secondAttribute="centerX" id="s5z-3s-hTQ"/>
                                 </constraints>
                             </stackView>
@@ -520,14 +519,14 @@ Use the buttons to arrange the historical facts in order from oldest to newest.<
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LyS-12-h9m">
-                                        <rect key="frame" x="40" y="96" width="240" height="29"/>
+                                        <rect key="frame" x="40" y="96" width="240" height="28.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="84" id="tS4-8P-zWe"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2K-hJ-PAd">
-                                        <rect key="frame" x="107" y="125" width="106" height="33"/>
+                                        <rect key="frame" x="107" y="124.5" width="106" height="33.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l2K-hJ-PAd" secondAttribute="height" multiplier="450:142" id="SZt-wf-wdp"/>
                                         </constraints>

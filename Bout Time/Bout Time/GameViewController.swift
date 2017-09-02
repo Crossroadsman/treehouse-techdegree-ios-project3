@@ -342,7 +342,11 @@ class GameViewController: UIViewController, GameDelegate {
             timeRemainingLabel.text = "0"
         } else {
             let timeRemaining = Int(getRemainingTime())
-            timeRemainingLabel.text = "\(timeRemaining)"
+            
+            let minutes = timeRemaining / 60
+            let secondsInt = timeRemaining % 60
+            let secondsString = secondsInt == 0 ? "00" : "\(secondsInt)"
+            timeRemainingLabel.text = "\(minutes):\(secondsString)"
         }
         
     }
