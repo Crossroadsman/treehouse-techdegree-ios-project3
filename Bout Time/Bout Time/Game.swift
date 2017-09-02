@@ -135,7 +135,7 @@ class Game: TimerManagerDelegate {
         delegate.roundDidEnd()
         
         roundNumber += 1
-        if roundNumber <= maxRounds {
+        if roundNumber <= (maxRounds - 1) {
             //startRound()
         } else {
             gameState = .gameOver
