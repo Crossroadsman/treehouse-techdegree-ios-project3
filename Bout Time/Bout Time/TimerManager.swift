@@ -59,6 +59,7 @@ class TimerManager {
         print("timer now: \(timeRemaining)")
         
         guard delegate != nil else {
+            print("somehow delegate was nil")
             return
         }
         
