@@ -312,10 +312,10 @@
                                 <rect key="frame" x="8" y="392" width="304" height="64"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iEu-id-YHh" userLabel="Next Round Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="304" height="64"/>
+                                        <rect key="frame" x="0.0" y="-49.5" width="0.0" height="163"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVd-bk-UCp">
-                                                <rect key="frame" x="67.5" y="0.0" width="169" height="43"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="142"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rVd-bk-UCp" secondAttribute="height" multiplier="558:142" id="G8m-a8-Gby"/>
                                                 </constraints>
@@ -325,7 +325,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap events to learn more" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-AS-wD7">
-                                                <rect key="frame" x="59" y="43" width="186.5" height="21"/>
+                                                <rect key="frame" x="0.0" y="142" width="0.0" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="lET-bd-CvL"/>
                                                 </constraints>
@@ -336,16 +336,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pw0-Sj-XTM" userLabel="Time Remaining Stack">
-                                        <rect key="frame" x="304" y="0.0" width="0.0" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="304" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:35" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="62D-c1-n1P" userLabel="Time remaining">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="43.5"/>
+                                                <rect key="frame" x="107" y="0.0" width="90" height="43.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="44"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake to complete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCW-Lj-wnH">
-                                                <rect key="frame" x="0.0" y="43.5" width="0.0" height="20.5"/>
+                                                <rect key="frame" x="81.5" y="43.5" width="141" height="20.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Uyj-m1-bid"/>
                                                 </constraints>
@@ -440,6 +440,9 @@
                                         <fontDescription key="fontDescription" name="HoeflerText-Black" family="Hoefler Text" pointSize="96"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="×"/>
+                                        <connections>
+                                            <action selector="exitButtonTapped:" destination="on0-0P-PlO" eventType="touchUpInside" id="ecq-YX-Ity"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -449,30 +452,31 @@
                                     <constraint firstAttribute="trailing" secondItem="Tej-5E-wn5" secondAttribute="trailing" constant="12" id="uFa-gJ-d2M"/>
                                 </constraints>
                             </view>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7B-Z7-ccf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5I-96-wOa">
                                 <rect key="frame" x="0.0" y="84" width="320" height="396"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tgX-An-2dB" firstAttribute="top" secondItem="o7B-Z7-ccf" secondAttribute="bottom" id="GGv-2n-Heu"/>
-                            <constraint firstAttribute="trailing" secondItem="o7B-Z7-ccf" secondAttribute="trailing" id="Gc7-gL-7mb"/>
-                            <constraint firstItem="o7B-Z7-ccf" firstAttribute="leading" secondItem="zxK-Tk-Eqe" secondAttribute="leading" id="QfU-WV-smr"/>
-                            <constraint firstItem="o7B-Z7-ccf" firstAttribute="top" secondItem="OFC-dP-nhs" secondAttribute="bottom" id="TDg-7j-iil"/>
+                            <constraint firstItem="J5I-96-wOa" firstAttribute="top" secondItem="OFC-dP-nhs" secondAttribute="bottom" id="7lp-f5-t0v"/>
+                            <constraint firstItem="J5I-96-wOa" firstAttribute="leading" secondItem="zxK-Tk-Eqe" secondAttribute="leading" id="IHa-p8-Pd4"/>
+                            <constraint firstItem="tgX-An-2dB" firstAttribute="top" secondItem="J5I-96-wOa" secondAttribute="bottom" id="RG4-xt-BMP"/>
                             <constraint firstItem="OFC-dP-nhs" firstAttribute="leading" secondItem="zxK-Tk-Eqe" secondAttribute="leading" id="hrd-W5-lbX"/>
+                            <constraint firstAttribute="trailing" secondItem="J5I-96-wOa" secondAttribute="trailing" id="iHh-Qg-gyO"/>
                             <constraint firstItem="OFC-dP-nhs" firstAttribute="top" secondItem="cT5-Hs-hWn" secondAttribute="bottom" id="jHs-80-V0K"/>
                             <constraint firstAttribute="trailing" secondItem="OFC-dP-nhs" secondAttribute="trailing" id="nWk-kx-gaZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="webContentView" destination="J5I-96-wOa" id="Hwj-IZ-42H"/>
                         <segue destination="6mW-SD-IKJ" kind="unwind" identifier="unwindToGameViewControllerFromWebViewViewController" unwindAction="unwindToGameViewControllerWithSegue:" id="NtK-Jd-1o1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jLw-Ex-fj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="6mW-SD-IKJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="708.69565217391312" y="-137.77173913043478"/>
+            <point key="canvasLocation" x="906" y="-284"/>
         </scene>
         <!--Game Over View Controller-->
         <scene sceneID="jKu-0j-qaG">
@@ -508,14 +512,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LyS-12-h9m">
-                                        <rect key="frame" x="40" y="96" width="240" height="29"/>
+                                        <rect key="frame" x="40" y="96" width="240" height="28.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="84" id="tS4-8P-zWe"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2K-hJ-PAd">
-                                        <rect key="frame" x="107" y="125" width="106" height="33"/>
+                                        <rect key="frame" x="107" y="124.5" width="106" height="33.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l2K-hJ-PAd" secondAttribute="height" multiplier="450:142" id="SZt-wf-wdp"/>
                                         </constraints>
@@ -544,7 +548,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mod-Xf-em8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2BL-IZ-Jmw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="701.44927536231887" y="509.51086956521743"/>
+            <point key="canvasLocation" x="906" y="504"/>
         </scene>
     </scenes>
     <resources>

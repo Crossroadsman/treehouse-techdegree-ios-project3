@@ -37,6 +37,6 @@ class GameOverViewController: UIViewController {
     @IBAction func playAgainButton(_ sender: UIButton) {
         // set up new game
         // unwind to GameViewController
-        performSegue(withIdentifier: "unwindToGameViewController", sender: nil)
+        performSegue(withIdentifier: "unwindToGameViewControllerFromGameOverViewController", sender: nil)
     }
 }

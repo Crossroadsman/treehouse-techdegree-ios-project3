@@ -178,5 +178,12 @@ class Game: TimerManagerDelegate {
         evaluateGameState()
     }
     
+    public func getUrlFor(event: String) -> URL? {
+        if let round = round {
+            return round.getUrlFor(event: event)
+        }
+        return nil
+    }
+    
     
 }

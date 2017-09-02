@@ -100,6 +100,13 @@ class GameViewController: UIViewController, GameDelegate {
                 let destination = segue.destination as! GameOverViewController
                 destination.numerator = 1
                 destination.denominator = 6
+                
+                case "toWebViewViewController":
+                let destination = segue.destination as! WebViewViewController
+                
+                destination.url = sender as! URL
+                
+                
             default:
                 print("unknown destination")
             }
@@ -149,10 +156,26 @@ class GameViewController: UIViewController, GameDelegate {
     
     @IBAction func tapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         
-        if game.getGameState() != .inRound {
-            print(sender.view?.tag)
-        }
+        // If we are not in a round (shouldn't be able to segue to web view if in the middle of an active round)
+        // AND if we can resolve the tapped view's tag (should always be possible)
+        // AND if we can resolve a URL from the event text corresponding to the tag's position in the label array
+        // THEN send that url to the destination to be displayed
         
+        if game.getGameState() != .inRound {
+            if let tag = sender.view?.tag {
+                
+                let eventText = labelTexts[tag]
+                
+                if let url = game.getUrlFor(event: eventText) {
+                    performSegue(withIdentifier: "toWebViewViewController", sender: url)
+                } else {
+                    print("unable to resolve a url for the specified event text")
+                }
+                
+            } else {
+                print("unable to resolve a tag for the indicated sender")
+            }
+        }
         
     }
     
