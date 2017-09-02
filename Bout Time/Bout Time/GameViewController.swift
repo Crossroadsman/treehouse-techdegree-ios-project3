@@ -227,6 +227,9 @@ class GameViewController: UIViewController, GameDelegate {
         shakeEnabled = true
         
         
+        //reset buttons
+        resetButtonImages(buttons: buttons)
+        
         loadLabelStrings()
         updateTimeRemainingLabel()
     }
